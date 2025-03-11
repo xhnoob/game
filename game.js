@@ -382,4 +382,40 @@ document.addEventListener('keydown', (event) => {
             }
             break;
     }
-}); 
+});
+
+// 添加移动端控制按钮事件监听
+document.getElementById('upBtn').addEventListener('click', function() {
+    if (isGameRunning && !isPaused && dy !== 1) {
+        dx = 0;
+        dy = -1;
+    }
+});
+
+document.getElementById('downBtn').addEventListener('click', function() {
+    if (isGameRunning && !isPaused && dy !== -1) {
+        dx = 0;
+        dy = 1;
+    }
+});
+
+document.getElementById('leftBtn').addEventListener('click', function() {
+    if (isGameRunning && !isPaused && dx !== 1) {
+        dx = -1;
+        dy = 0;
+    }
+});
+
+document.getElementById('rightBtn').addEventListener('click', function() {
+    if (isGameRunning && !isPaused && dx !== -1) {
+        dx = 1;
+        dy = 0;
+    }
+});
+
+// 防止移动端滑动页面
+document.addEventListener('touchmove', function(e) {
+    if (e.target.classList.contains('direction-btn')) {
+        e.preventDefault();
+    }
+}, { passive: false }); 

@@ -106,4 +106,72 @@ button:active {
 
 .instructions p {
     margin: 5px 0;
+}
+
+.mobile-controls {
+    margin-top: 20px;
+    display: none; /* 默认在桌面端隐藏 */
+}
+
+.mobile-controls-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.direction-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    background: linear-gradient(145deg, #2196F3, #1976D2);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.direction-btn:active {
+    transform: scale(0.95);
+    background: linear-gradient(145deg, #1976D2, #2196F3);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 15px;
+    }
+
+    .mobile-controls {
+        display: block;
+    }
+
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+    }
+
+    .info-panel {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .score-panel, .high-score, .speed-panel {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .instructions {
+        font-size: 0.8em;
+    }
 } 
