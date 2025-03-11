@@ -385,36 +385,46 @@ document.addEventListener('keydown', (event) => {
 });
 
 // 添加移动端控制按钮事件监听
-document.getElementById('upBtn').addEventListener('click', function() {
-    if (isGameRunning && !isPaused && dy !== 1) {
-        dx = 0;
-        dy = -1;
-    }
-});
+const directionButtons = {
+    'upBtn': { dx: 0, dy: -1, opposite: 1 },
+    'downBtn': { dx: 0, dy: 1, opposite: -1 },
+    'leftBtn': { dx: -1, dy: 0, opposite: 1 },
+    'rightBtn': { dx: 1, dy: 0, opposite: -1 }
+};
 
-document.getElementById('downBtn').addEventListener('click', function() {
-    if (isGameRunning && !isPaused && dy !== -1) {
-        dx = 0;
-        dy = 1;
-    }
-});
+Object.entries(directionButtons).forEach(([btnId, direction]) => {
+    const btn = document.getElementById(btnId);
+    
+    // 处理点击事件
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (isGameRunning && !isPaused && 
+            (direction.dx === 0 ? dy !== direction.opposite : dx !== direction.opposite)) {
+            dx = direction.dx;
+            dy = direction.dy;
+        }
+    });
 
-document.getElementById('leftBtn').addEventListener('click', function() {
-    if (isGameRunning && !isPaused && dx !== 1) {
-        dx = -1;
-        dy = 0;
-    }
-});
-
-document.getElementById('rightBtn').addEventListener('click', function() {
-    if (isGameRunning && !isPaused && dx !== -1) {
-        dx = 1;
-        dy = 0;
-    }
+    // 处理触摸事件
+    btn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        if (isGameRunning && !isPaused && 
+            (direction.dx === 0 ? dy !== direction.opposite : dx !== direction.opposite)) {
+            dx = direction.dx;
+            dy = direction.dy;
+        }
+    });
 });
 
 // 防止移动端滑动页面
 document.addEventListener('touchmove', function(e) {
+    if (e.target.classList.contains('direction-btn')) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// 防止移动端双击缩放
+document.addEventListener('touchstart', function(e) {
     if (e.target.classList.contains('direction-btn')) {
         e.preventDefault();
     }
