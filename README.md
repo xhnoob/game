@@ -51,11 +51,11 @@
 
 1. 克隆仓库
 ```bash
-git clone [仓库地址]
+git clone https://github.com/xhnoob/game.git
 ```
 
 2. 在浏览器中打开index.html文件即可开始游戏
 
 ## 在线演示
 
-[在线游戏地址] 
+[在线游戏地址](https://xhnoob.github.io/game) 
